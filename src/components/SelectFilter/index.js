@@ -1,8 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
-import styles from './index.css'
+// import components
+import FilterList from 'components/FilterList';
+import FilterSearch from 'components/FilterSearch';
 
+import styles from './index.css';
 
 export default class SelectFilter extends Component {
 
@@ -11,18 +14,31 @@ export default class SelectFilter extends Component {
             name: PropTypes.string,
             children: PropTypes.array,
         })).isRequired,
-        onChange: PropTypes.func,
-        rootStyle: PropTypes.string
+        updateSelectedFilter: PropTypes.func,
+        updateSearch: PropTypes.func,
+        selectedFilter: PropTypes.string,
+        rootStyle: PropTypes.string,
     }
 
     render() {
         const {
-            rootStyle
+            rootStyle,
+            filters,
+            updateSelectedFilter,
+            updateSearch,
+            selectedFilter,
         } = this.props;
 
         return (
             <div className={ classNames(styles.selectfilter, rootStyle)}>
-                Code your Component here
+                <FilterSearch
+                    updateSearch={ updateSearch }
+                />
+                <FilterList
+                  filters={filters}
+                  updateSelectedFilter={updateSelectedFilter}
+                  selectedFilter={selectedFilter}
+                />
             </div>
         )
     }
